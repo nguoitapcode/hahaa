@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Năm Mới</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: radial-gradient(circle, #ff9a9e, #fad0c4, #fbc2eb);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin: 0;
+            animation: fadeIn 3s;
+        }
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            animation: fadeIn 4s;
+        }
+        button:hover {
+            background-color: #ff8e7f;
+            transform: scale(1.1);
+            transition: transform 0.2s;
+        }
+        .firework {
+            position: absolute;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards, sparkle 2s infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+        @keyframes sparkle {
+            0%, 100% { box-shadow: 0 0 5px white; }
+            50% { box-shadow: 0 0 15px white; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks" id="fireworks"></div>
+    <h1>🎉 Chúc Mừng Năm Mới 2025! 🎆</h1>
+    <p>Chúc bạn một năm mới tràn đầy sức khỏe, hạnh phúc và thành công!</p>
+    <button onclick="triggerFireworks()">Thêm pháo hoa 🎇</button>
+
+    <audio id="background-music" loop autoplay>
+        <source src="https://www.bensound.com/bensound-music/bensound-dreams.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const createFirework = (x, y) => {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            const size = Math.random() * 10 + 10;
+            firework.style.width = `${size}px`;
+            firework.style.height = `${size}px`;
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            firework.style.top = `${y}px`;
+            firework.style.left = `${x}px`;
+            firework.style.position = 'absolute';
+            firework.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(firework);
+            setTimeout(() => firework.remove(), 2000);
+        };
+
+        const triggerFireworks = () => {
+            for (let i = 0; i < 30; i++) {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                createFirework(x, y);
+            }
+        };
+
+        setInterval(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createFirework(x, y);
+        }, 400);
+
+        document.addEventListener('click', (event) => {
+            createFirework(event.clientX, event.clientY);
+        });
+    </script>
+</body>
+</html>
